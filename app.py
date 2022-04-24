@@ -12,14 +12,22 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import jieba
 import jieba.analyse
 import matplotlib.pyplot as plt
+import os
 
 def get_data():
-    browser = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    
+    
+    browser.get('https://tw.news.yahoo.com/archive/')
     browser.maximize_window()
     wait = WebDriverWait(browser, 25)
     waitPopWindow = WebDriverWait(browser, 25)
 
-    browser.get("https://tw.news.yahoo.com/archive/")
 
     time.sleep(2)
     for i in range(10):
