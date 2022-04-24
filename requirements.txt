@@ -1,4 +1,0 @@
-selenium
-wordcloud
-beautifulsoup4
-jieba
